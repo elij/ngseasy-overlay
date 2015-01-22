@@ -25,7 +25,6 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-buildsystem.patch"
 }
 
 src_compile() {

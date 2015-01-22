@@ -27,6 +27,6 @@ src_install() {
 	exeinto /usr/share/${PN}
 	doexe xa2multi.pl || die
 	doexe qualfa2fq.pl || die
-	dodoc ChangeLog NEWS || die
+	dodoc ChangeLog || die
 }
 
