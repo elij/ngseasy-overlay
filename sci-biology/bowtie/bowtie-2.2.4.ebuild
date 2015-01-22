@@ -9,7 +9,7 @@ SRC_URI="mirror://sourceforge/project/${PN}-bio/${PN}2/${PV}/${PN}2-${PV}-source
 LICENSE="GPL-3"
 SLOT="2"
 IUSE="examples"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 RDEPEND="dev-lang/perl"
 DEPEND="${RDEPEND}
