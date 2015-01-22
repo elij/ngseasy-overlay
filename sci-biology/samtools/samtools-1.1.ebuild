@@ -34,8 +34,6 @@ src_prepare() {
 
 	sed -i 's~/software/bin/python~/usr/bin/env python~' "${S}"/misc/varfilter.py || die
 
-	epatch "${FILESDIR}"/${P}-buildsystem.patch
-
 	tc-export CC AR
 
 	sed \
