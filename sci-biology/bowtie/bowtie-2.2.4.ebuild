@@ -24,9 +24,6 @@ pkg_pretend() {
 	fi
 }
 
-src_prepare() {
-}
-
 src_compile() {
 	emake \
 		CC="$(tc-getCC)" \
