@@ -8,6 +8,6 @@ SLOT="0"
 KEYWORDS="x86 amd64" 
 
 src_install() {
-	dobin ${PN}
+	dobin bin/*
 	
 }
