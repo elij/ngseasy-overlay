@@ -7,6 +7,8 @@ EGIT_COMMIT="v${PV}"
 SLOT="0"
 KEYWORDS="x86 amd64" 
 
+RDEPENDS="dev-util/cmake"
+
 src_install() {
 	dobin bin/*
 	
