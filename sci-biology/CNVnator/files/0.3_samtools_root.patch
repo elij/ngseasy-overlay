@@ -1,0 +1,22 @@
+--- CNVnator_v0.3/src/Makefile	2014-02-02 04:29:35.000000000 +0000
++++ CNVnator_v0.3_gen/src/Makefile	2015-02-04 11:30:10.821295130 +0000
+@@ -2,14 +2,14 @@
+ #ROOTFLAGS = -pthread -m64
+ ROOTFLAGS = -m64
+ LIBS      = -lz
+-ROOTLIBS  = -L$(ROOTSYS)/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d \
++ROOTLIBS  = -L$(ROOTSYS)/lib64/root -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d \
+ 		-lGpad -lTree -lRint -lMatrix -lPhysics \
+-		-lMathCore -lThread -lGui
++		-lMathCore -lThread -lGui -lhts -lbam
+ 
+ CXX    = g++ $(ROOTFLAGS) -DCNVNATOR_VERSION=\"$(VERSION)\"
+-SAMDIR = samtools
+-INC    = -I$(ROOTSYS)/include -I$(SAMDIR)
+-SAMLIB = $(SAMDIR)/libbam.a
++SAMDIR = $(ROOTSYS)/include/bam/
++INC    = -I$(ROOTSYS)/include/root -I$(ROOTSYS)/include/bam
++#SAMLIB = $(SAMDIR)/libbam.a
+ 
+ OBJDIR = obj
+ OBJS   = $(OBJDIR)/cnvnator.o  \
