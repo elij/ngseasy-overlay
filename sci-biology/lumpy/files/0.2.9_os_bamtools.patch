@@ -1,0 +1,99 @@
+diff -ru '--exclude=.git' 0.2.9/Makefile lumpy-sv/Makefile
+--- 0.2.9/Makefile	2015-02-19 08:54:42.505070769 +0000
++++ lumpy-sv/Makefile	2015-02-19 08:47:20.997618505 +0000
+@@ -22,7 +22,6 @@
+ ##export CXXFLAGS = -Wall -O2 -D_FILE_OFFSET_BITS=64 -fPIC
+ #endif
+ export LIBS		= -lz
+-export BT_ROOT  = src/utils/BamTools/
+ 
+ 
+ SUBDIRS = $(SRC_DIR)/lumpy
+@@ -33,7 +32,6 @@
+ 				$(SRC_DIR)/utils/fileType \
+ 				$(SRC_DIR)/utils/bedFilePE \
+ 				$(SRC_DIR)/utils/genomeFile \
+-				$(SRC_DIR)/utils/BamTools \
+ 				$(SRC_DIR)/utils/BamTools-Ancillary \
+ 				$(SRC_DIR)/utils/sequenceUtilities \
+ 				$(SRC_DIR)/utils/sqlite3
+@@ -46,8 +44,6 @@
+ 	@echo "Building lumpy:"
+ 	@echo "========================================================="
+ 
+-	@$(MAKE) --no-print-directory --directory=$(BT_ROOT) api
+-	
+ 	@for dir in $(UTIL_SUBDIRS); do \
+ 		echo "- Building in $$dir"; \
+ 		$(MAKE) --no-print-directory -C $$dir; \
+@@ -66,9 +62,5 @@
+ clean:
+ 	@echo "Cleaning up."
+ 	@rm -f $(OBJ_DIR)/* $(BIN_DIR)/*
+-	@rm -Rf $(BT_ROOT)/lib
+-	@rm -f $(BT_ROOT)/src/api/*.o
+-	@rm -f $(BT_ROOT)/src/api/internal/*.o
+-	@rm -Rf $(BT_ROOT)/include
+ 
+ .PHONY: clean
+diff -ru '--exclude=.git' 0.2.9/src/lumpy/Makefile lumpy-sv/src/lumpy/Makefile
+--- 0.2.9/src/lumpy/Makefile	2015-02-19 08:54:42.737062847 +0000
++++ lumpy-sv/src/lumpy/Makefile	2015-02-19 08:48:39.644700641 +0000
+@@ -12,7 +12,7 @@
+            -I$(UTILITIES_DIR)/gzstream/ \
+            -I$(UTILITIES_DIR)/lineFileUtilities/ \
+            -I$(UTILITIES_DIR)/fileType/ \
+-           -I$(UTILITIES_DIR)/BamTools/include \
++           -I/usr/include/bamtools \
+ 		   -I$(UTILITIES_DIR)/BamTools-Ancillary \
+            -I$(UTILITIES_DIR)/sequenceUtilities \
+            -I$(UTILITIES_DIR)/UCSCBins \
+@@ -54,7 +54,7 @@
+ $(PROGRAM): $(BUILT_OBJECTS) $(EXT_OBJECTS)
+ 	@echo "  * linking $(PROGRAM)"
+ 	@$(CXX) $(LDFLAGS) $(CXXFLAGS) -o $(BIN_DIR)/$@ $^ \
+-		-L$(UTILITIES_DIR)/BamTools/lib/ -lbamtools \
++		-lbamtools \
+ 		$(LIBS) \
+ 		-lz -lm -ldl -lpthread
+ 
+@@ -64,7 +64,6 @@
+ 
+ $(EXT_OBJECTS):
+ 	@$(MAKE) --no-print-directory -C $(UTILITIES_DIR)/BamTools-Ancillary/
+-	@$(MAKE) --no-print-directory -C $(UTILITIES_DIR)/BamTools/
+ 	@$(MAKE) --no-print-directory -C $(UTILITIES_DIR)/bedFilePE/
+ 	@$(MAKE) --no-print-directory -C $(UTILITIES_DIR)/sequenceUtilities/
+ 	@$(MAKE) --no-print-directory -C $(UTILITIES_DIR)/lineFileUtilities/
+Only in 0.2.9/src/utils: BamTools
+diff -ru '--exclude=.git' 0.2.9/src/utils/BamTools-Ancillary/Makefile lumpy-sv/src/utils/BamTools-Ancillary/Makefile
+--- 0.2.9/src/utils/BamTools-Ancillary/Makefile	2015-02-19 08:54:42.737062847 +0000
++++ lumpy-sv/src/utils/BamTools-Ancillary/Makefile	2015-02-19 08:49:45.329173513 +0000
+@@ -2,7 +2,7 @@
+ BIN_DIR = ../../../bin/
+ UTILITIES_DIR = ../
+ 
+-INCLUDES = -I$(UTILITIES_DIR)/BamTools/include \
++INCLUDES = -I/usr/include/bamtools \
+            -I$(UTILITIES_DIR)/bedFile/ \
+            -I$(UTILITIES_DIR)/lineFileUtilities/ \
+            -I$(UTILITIES_DIR)/gzstream/ \
+@@ -27,4 +27,4 @@
+ 	@echo "Cleaning up."
+ 	@rm -f $(OBJ_DIR)/* $(BIN_DIR)/*
+ 
+-.PHONY: clean
+\ No newline at end of file
++.PHONY: clean
+diff -ru '--exclude=.git' 0.2.9/src/utils/genomeFile/Makefile lumpy-sv/src/utils/genomeFile/Makefile
+--- 0.2.9/src/utils/genomeFile/Makefile	2015-02-19 08:54:42.757062164 +0000
++++ lumpy-sv/src/utils/genomeFile/Makefile	2015-02-19 08:49:18.258572544 +0000
+@@ -6,7 +6,7 @@
+ # -------------------
+ INCLUDES = -I$(UTILITIES_DIR)/lineFileUtilities/ \
+            -I$(UTILITIES_DIR)/fileType/ \
+-           -I$(UTILITIES_DIR)/BamTools/include/	
++           -I/usr/include/bamtools	
+ 
+ # ----------------------------------
+ # define our source and object files
