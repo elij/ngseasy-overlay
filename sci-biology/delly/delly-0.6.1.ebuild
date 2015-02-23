@@ -13,7 +13,7 @@ SLOT="0"
 IUSE=""
 KEYWORDS="amd64"
 
-DEPENDS="sci-biology/bamtools
+DEPEND="sci-biology/bamtools
 	dev-libs/boost
 	sci-libs/htslib"
 
