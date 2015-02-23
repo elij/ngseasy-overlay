@@ -14,7 +14,7 @@ KEYWORDS="x86 amd64"
 DEPEND="sci-BIOC/Rsamtools
 	>=sci-CRAN/VGAM-0.8.4
 	>=sci-BIOC/GenomicRanges-1.8.10
-	>=dev-lang/R-2.15.0
+	>=dev-lang/R-3.0.1
 	sci-CRAN/aod
 "
 RDEPEND="${DEPEND-}"
