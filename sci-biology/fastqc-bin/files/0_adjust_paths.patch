@@ -1,0 +1,44 @@
+--- /tmp/FastQC/fastqc	2014-06-04 09:03:40.000000000 +0000
++++ /usr/bin/fastqc	2015-03-06 14:41:43.014136100 +0000
+@@ -1,7 +1,6 @@
+ #!/usr/bin/perl
+ use warnings;
+ use strict;
+-use FindBin qw($RealBin);
+ use Getopt::Long;
+ 
+ #####################################################################################
+@@ -28,21 +27,19 @@
+ # Check to see if they've mistakenly downloaded the source distribution
+ # since several people have made this mistake
+ 
+-if (-e "$RealBin/uk/ac/babraham/FastQC/FastQCApplication.java") {
+-	die "This is the source distribution of FastQC.  You need to get the compiled version if you want to run the program\n";
+-}
+-
+ my $delimiter = ':';
++my $classpath = '/usr/share/fastqc-bin/lib';
++my $picardpath = '/usr/share/picard/lib';
+ 
+ if ($^O =~ /Win/) {
+ 	$delimiter = ';';
+ }
+ 
+ if ($ENV{CLASSPATH}) {
+-	$ENV{CLASSPATH} .= "$delimiter$RealBin$delimiter$RealBin/sam-1.103.jar$delimiter$RealBin/jbzip2-0.9.jar";
++	$ENV{CLASSPATH} .= "$delimiter$picardpath/sam.jar$delimiter$classpath/jbzip2-0.9.jar$delimiter$classpath/FastQC.jar";
+ }
+ else {
+-	$ENV{CLASSPATH} = "$RealBin$delimiter$RealBin/sam-1.103.jar$delimiter$RealBin/jbzip2-0.9.jar";
++	$ENV{CLASSPATH} = "$delimiter$picardpath/sam.jar$delimiter$classpath/jbzip2-0.9.jar$delimiter$classpath/FastQC.jar";
+ }
+ 
+ my @java_args;
+@@ -367,4 +364,4 @@
+     Any bugs in fastqc should be reported either to simon.andrews@babraham.ac.uk
+     or in www.bioinformatics.babraham.ac.uk/bugzilla/
+                    
+-    
+\ No newline at end of file
++    
+
