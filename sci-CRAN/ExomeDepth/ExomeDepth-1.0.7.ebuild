@@ -7,7 +7,7 @@ EAPI=4
 inherit R-packages
 
 DESCRIPTION='Calls CNV from exome sequence data'
-SRC_URI="http://cran.r-project.org/src/contrib/Archive/ExomeDepth/ExomeDepth_${PV}.tar.gz"
+SRC_URI="http://cran.r-project.org/bin/macosx/contrib/3.1/ExomeDepth_${PV}.tgz"
 LICENSE='GPL-3'
 KEYWORDS="x86 amd64"
 
@@ -18,3 +18,4 @@ DEPEND="sci-BIOC/Rsamtools
 	sci-CRAN/aod
 "
 RDEPEND="${DEPEND-}"
+
